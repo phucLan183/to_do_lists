@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('layouts/head.ejs') -%>
+</head>
+
+<body>
+  <main class="app-main-edit">
+    <div class="app-header flex items-center justify-center"> <a class="header-back" href="/"><img
+          src="/icons/icon-arrow-left.svg" alt=""></a>
+      <div class="header-title">Edit your thing</div>
+    </div>
+    <div class="app-icon"> <img src="/icons/icon-edit.svg" alt=""></div>
+    <form class="app-form" method="post">
+      <% for(let rows of rows_task){%>
+      <div class="form-group">
+        <div class="form-item">
+          <input type="text" placeholder="Title" name="title" value="<%= rows.title %>">
+          <!-- <div class="form-error">Title</div> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item">
+          <input type="text" placeholder="Description" name="description" value="<%= rows.description %>">
+          <!-- <div class="form-error">Description</div> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item">
+          <select name="cat_id">
+            <option value="<%= rows.cat_id %>" selected><%= rows.name %></option>
+            <% for(let category of rows_category) {%>
+            <option value="<%= category.id %>"><%= category.name %></option>
+            <%}%>
+          </select>
+        </div>
+      </div>
+      <%}%>
+            <div class="form-group">
+              <div class="form-item">
+                <button type="submit">Edit your thing</button>
+              </div>
+            </div>
+    </form>
+  </main>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

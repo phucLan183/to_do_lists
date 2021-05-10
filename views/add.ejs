@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('layouts/head.ejs') -%>
+</head>
+
+<body>
+  <main class="app-main-edit">
+    <div class="app-header flex items-center justify-center"> <a class="header-back" href="/"><img
+          src="/icons/icon-arrow-left.svg" alt=""></a>
+      <div class="header-title">Add new thing</div>
+    </div>
+    <div class="app-icon"> <img src="/icons/icon-edit.svg" alt=""></div>
+    <form class="app-form" action="/addtask" method="POST">
+      <div class="form-group">
+        <div class="form-item">
+          <input type="text" placeholder="Title" name="title" required>
+          <!-- <div class="form-error">Title</div> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item">
+          <input type="text" placeholder="Description" name="description" required>
+          <!-- <div class="form-error">Description</div> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item">
+          <select name="cat_id">
+            <% for (let category of categoryRows) {%>
+            <option value="<%= category.id%>">
+              <%= category.name%>
+            </option>
+            <%}%>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item">
+          <button type="submit">Add your thing</button>
+        </div>
+      </div>
+    </form>
+  </main>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>
