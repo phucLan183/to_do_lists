@@ -125,6 +125,30 @@ const restore = async (req, res) => {
   }
 }
 
+const category = async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId
+    const date = new Date().toDateString()
+    const categories = "SELECT * FROM categories"
+    const categoryRows = await query(categories)
+    const tasks = `SELECT tasks.id, tasks.title, tasks.description, tasks.completed, tasks.create_at, categories.icon FROM tasks LEFT JOIN categories ON tasks.cat_id = categories.id WHERE tasks.cat_id = ${categoryId}`
+    const taskRows = await query(tasks)
+    const total = `SELECT COUNT(*) AS total, SUM(IF(tasks.completed, 1, 0)) AS completed, SUM(IF(tasks.completed, 0, 1)) AS unfinish FROM tasks WHERE tasks.cat_id = ${categoryId}`
+    const rows_total = await query(total) 
+    const percent = Math.ceil(rows_total[0].completed / rows_total[0].total * 100) || 0
+    res.render('main', {
+      dateNow: date,
+      categoryRows: categoryRows,
+      taskRows: taskRows,
+      rows_total: rows_total,
+      percent: percent,
+      categoryId: categoryId,
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 module.exports = {
   home: home,
@@ -136,4 +160,5 @@ module.exports = {
   obliterate: obliterate,
   complete: complete,
   restore: restore,
+  category: category,
 }

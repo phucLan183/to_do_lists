@@ -19,11 +19,10 @@
           <div class="form-group">
             <div class="form-item flex justify-end">
               <select name="category">
-                <option value="*" selected>All</option>
+                <option value=""></option>
+                <option value="*">All</option>
                 <%for (let rows of categoryRows) { %>
-                <option value="<%= rows.id %>">
-                  <%= rows.name%>
-                </option>
+                <option value="<%= rows.id %>"><%= rows.name%></option>
                 <%}%>
               </select>
             </div>

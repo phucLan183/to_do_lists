@@ -3,6 +3,7 @@ const router = express.Router();
 const taskController = require('../controllers/Tasks');
 
 router.get('/', taskController.home)
+router.get('/category/:categoryId', taskController.category)
 
 router.get('/addtask', taskController.indexAdd)
 router.post('/addtask', taskController.addNew)

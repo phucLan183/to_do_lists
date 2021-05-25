@@ -16,3 +16,13 @@ const momentTime = {
     setInterval(startTime , 1000)
   }
 }
+
+document.querySelectorAll("[name=category]")[0].addEventListener('change',
+  function () {
+    if (this.value === '*') {
+      window.location = "http://localhost:3333/" 
+    } else {
+      window.location = "http://localhost:3333/category/" + this.value;
+    }
+  }
+);
